@@ -40,8 +40,21 @@ function CheckDatabase() {
                     .then((data) => {
                         if (data.length !== 0) {
                             transaction = db.transaction(['BudgetStore'], 'readwrite')
+
+                            const currentStore = transaction.objectStore('BudgetStore')
+
+                            currentStore.clear()
                         }
                     })
         }
+    }
+}
+
+request.onsuccess = function(event) {
+
+    db = event.target.result
+
+    if(navigator.onLine) {
+        checkDatabase()
     }
 }
