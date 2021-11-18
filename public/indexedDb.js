@@ -58,3 +58,14 @@ request.onsuccess = function(event) {
         checkDatabase()
     }
 }
+
+const saveRecord = (data) => {
+
+    const transaction = db.transaction(['BudgetStore'], 'readwrite')
+
+    const store = transaction.objectStore('BudgetStore')
+
+    store.add(data)
+}
+
+window.addEventListener('online', checkDatabase)
